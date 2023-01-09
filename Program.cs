@@ -1,6 +1,8 @@
 ﻿using CitizensList;
 using System;
 
+List<Person> citizensList = new();
+
 var fileName = "CitizenList.txt";
 
 {
