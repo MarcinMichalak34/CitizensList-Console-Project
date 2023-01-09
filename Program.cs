@@ -22,7 +22,7 @@ var fileName = "CitizenList.txt";
         }
         else
         {
-            var currentCitizen = Person.CitizensList.FirstOrDefault(x => x.PersonalIDNumber == personalIDNumber);
+            var currentCitizen = citizensList.FirstOrDefault(x => x.PersonalIDNumber == personalIDNumber);
             if (currentCitizen != null)
             {
                 Console.WriteLine("Citizen exists, overwriting data.");
@@ -31,13 +31,13 @@ var fileName = "CitizenList.txt";
             else
             {
                 var citizen = new Person(name, lastName, personalIDNumber, city);
-                Person.CitizensList.Add(citizen);
+                citizensList.Add(citizen);
                 Console.WriteLine("New citizen add to database.");
                 Console.WriteLine("If you want add another citizen, click ENTER. If you want exit program, click ESC.");
             }
             using (StreamWriter sw = new(fileName))
             { 
-                foreach (var citizen in Person.CitizensList)
+                foreach (var citizen in citizensList)
                 {
                     sw.WriteLine(Person.PersonToString(citizen));
                 }
