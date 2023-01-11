@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CitizensList
 {
     public class Helper
     {
-        public static bool PersonalIDNumberVerification(string pesel)
+        public static bool PersonalIDNumberVerification(string personalIDnumber)
         {
-            if (pesel.Length != 11)
+            if (personalIDnumber.Length != 11)
             {
                 return false;
             }
@@ -20,7 +21,7 @@ namespace CitizensList
 
             for (int i = 0; i < 10; i++)
             {
-                sum += weights[i] * (pesel[i] - '0');
+                sum += weights[i] * (personalIDnumber[i] - '0');
             }
 
             int checkDigit = 10 - (sum % 10);
@@ -30,7 +31,19 @@ namespace CitizensList
                 checkDigit = 0;
             }
 
-            return pesel[10] - '0' == checkDigit;
+            return personalIDnumber[10] - '0' == checkDigit;
+        }
+
+        public static bool CitizenExists(string PersonalIDnumber, List<Person> citizensList)
+        {
+            foreach (Person resident in citizensList)
+            {
+                if (resident.PersonalIDNumber == PersonalIDnumber)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
